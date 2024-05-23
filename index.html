@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head or tail?</title>
+</head>
+<body>
+    <style>
+        
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+*{
+    font-family: "Roboto", sans-serif;
+}
+body{
+    padding: 0;
+    margin: 0;
+    transition: ease-in .7s;
+    
+}
+.card_container{
+    position: relative;
+    height: 300px;
+    display: none;
+}
+.card{
+    position: absolute;
+    left: 50%;
+    margin: 10px 0;
+    margin-top: 50px;
+    transform: translate(-50%);
+    max-width: 350px;
+    width: 100%;
+    border: 2px solid #d3d3d3;
+    border-radius: 5px;
+    text-align: center
+    
+}
+
+@media  screen and (max-width:450px) {
+    
+}
+
+.card #header{
+    
+    color: #ffffff;
+    padding: 10px 20px;
+    transition: .5s;
+}
+
+.card #btn{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    background: #f1a4c2;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* ---------bg color---------- */
+.body_bg_color{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px 0;
+}
+.heading h1{
+    font-size: 30px;
+}
+.bg_color_text h3{
+    font-size: 20px;
+}
+.body_bg{
+    display: flex;
+    justify-content: space-around;
+    max-width: 350px;
+    width: 100%;
+    background: #dedede;
+    padding: 30px 10px;
+    border-radius: 5px;
+}
+.element{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.warm{
+    background: #fcdddd;
+}
+.dark{
+    background: #2b2b2b;
+}
+.orange{
+    background: #ff8800;
+}
+.green{
+    background: #06c81c;
+}
+
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 0;
+}
+.btn{
+    padding: 10px 40px;
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 20px;
+}
+.generate{
+    background: #29fb2c;
+}
+.reset{
+    background: red;
+}
+#publisher{
+    font-size: 50px;
+    text-align: center; 
+}
+
+#warning{
+    text-align: center;
+    display: none;
+    color: red;
+}
+
+</style>
+           <!------Change body color section------>
+
+           <section id="body_bg_color" class="body_bg_color">
+            <div class="heading">
+                <h1>Head & Tail Generator </h1>
+            </div>
+            <div class="bg_color_text">
+                <h3 >Select a background color</h3>
+            </div>
+            <div class="body_bg">
+                <div id="warm" class="warm element"></div>
+                <div id="dark" class="dark element"></div>
+                <div id="orange" class="orange element"></div>
+                <div id="green" class="green element"></div>
+            </div>       
+        </section>
+    
+        <section class="main">
+            <div class="container">
+               
+                <div class="buttons">
+                    <button class="btn generate" onclick="generator()">Generate </button>
+                    <button class="btn reset" onclick="resetRandomNumber()">reset</button>
+                </div>
+                <div class="text_container">
+                    <h2 id="publisher"></h2>
+                    <p id="warning">Please reset frist</p>
+                    <p id="rand"></p>
+                </div>
+            </div>
+        </section>
+        
+    
+         <!---Rainbow color section---->
+         <section class="card_container">
+            <div class="card">
+                <h1>Do you know the color of rainbow?<br>
+                    if don't just click</h1>
+                <button id="btn">click me</button>
+                <h2 id="header"></h2>
+            
+            </div>
+        </section>
+
+
+      
+
+
+<script>
+            
+//---------rainbow js-------
+let header = document.querySelector('#header');
+let button = document.querySelector('#btn');
+
+
+const rainbowColor ={
+    red:"#FF0000",
+    orange:"#FF7F00",
+    yellow:"#FFFF00",
+    green:"#00FF00",
+    blue:"#0000FF",
+    indigo:"#4B0082",
+    violet:"#9400D3"
+};
+
+const allKey = Object.keys(rainbowColor);
+const keyLength = allKey.length;
+const allValue = Object.values(rainbowColor);
+
+
+let i = 0 ;
+function myFun(){
+    
+    if (i == keyLength){
+        i= 0;
+    }
+    header.style.background =  allValue[i];
+    header.textContent =  allKey[i];
+        i+=1;
+}
+
+button.addEventListener("click",myFun);
+
+//=======body background color changing js
+
+
+
+const bodyBg = {
+    warm:"#fcdddd",
+    dark:"#2b2b2b",
+    orange:"#ff8800",
+    green:"#06c81c",
+    white:"#ffffff",
+    black:"#000000",
+};
+
+const elements = document.querySelectorAll(".element");
+const body = document.querySelector("body");
+
+elements.forEach(function(element){
+    element.addEventListener("click",function(e){
+        if(e.target.id =="warm"){
+            body.style.background = bodyBg.warm;
+            body.style.color = bodyBg.black;
+        }
+        if(e.target.id =="dark"){
+            body.style.background = bodyBg.dark;
+            body.style.color = bodyBg.white;
+        }
+        if(e.target.id =="orange"){
+            body.style.background = bodyBg.orange;
+            body.style.color = bodyBg.white;
+        }
+        if(e.target.id =="green"){
+            body.style.background = bodyBg.green;
+            body.style.color = bodyBg.white;
+        }
+
+    });
+
+});
+
+
+// ----------Head and tail generator-------------------
+
+
+
+let publisher = document.getElementById("publisher");
+
+let warning = document.getElementById("warning");
+let rand = document.getElementById("rand");
+
+
+
+function generator(){
+    if(publisher.textContent.length > 0){
+        warning.style.display ="block";
+    }
+    else{
+        let randomNumber = Math.ceil(Math.random()*2); 
+        setTimeout(() => {
+            if (randomNumber == 1){
+                publisher.textContent = "Heads";
+            }
+            else{
+                publisher.textContent = "Tails";
+            }  
+            
+        console.log(randomNumber);
+            
+        },1000);
+    }
+       
+    
+}
+
+function resetRandomNumber (){
+    randomNumber = "";
+    publisher.textContent = "";
+    warning.style.display ="none";
+}
+
+
+
+</script>
+    
+</body>
+</html>
